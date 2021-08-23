@@ -37,17 +37,11 @@ function App() {
 
   useEffect(() => {
     const canvas = canvasRef.current
-    const ctx = canvas.getContext('2d')
 
     // set width and height according to screen size.
     // this is also applied when the screen size changes
     canvas.width = window.innerWidth - 100
     canvas.height = window.innerHeight - 420
-
-    // set colors of canvas items.
-    // basically required on-mount, but it won't hurt performance by applying this on window-size-change
-    ctx.strokeStyle = canvasColor
-    ctx.fillStyle = canvasColor
 
     // eslint-disable-next-line
   }, [window.innerWidth, window.innerHeight])
@@ -56,6 +50,12 @@ function App() {
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d')
 
+    // set colors of canvas items.
+    // basically required only once, but it won't hurt performance by applying this again when this useEffect is called
+    ctx.strokeStyle = canvasColor
+    ctx.fillStyle = canvasColor
+
+    // the animation draw function, creates the visuals on the canvas
     const draw = () => {
       pulseCount++
       let maxPrice = 0
