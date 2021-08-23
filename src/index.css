@@ -1,6 +1,7 @@
 :root {
   --dark: #141428;
   --light: #f9f9f9;
+  --blue: #3564f6;
 }
 
 body {
@@ -13,4 +14,33 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.app {
+  width: 100vw;
+  min-height: 100vh;
+  background: var(--dark);
+}
+
+.ticker {
+  height: 18rem;
+  color: var(--light);
+}
+
+.logo {
+  width: 11rem;
+  height: 11rem;
+  -webkit-filter: drop-shadow(0.5px -0.5px 0.5px var(--light));
+  filter: drop-shadow(0.5px -0.5px 0.5px var(--light));
+}
+
+.price {
+  font-size: 2rem;
 }
