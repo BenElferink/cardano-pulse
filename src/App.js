@@ -2,23 +2,26 @@ import {useEffect, useRef, useState} from 'react'
 import logo from './images/cardano-logo-1024x1024.png'
 
 const ticker = 'ADABUSD'
+const canvasColor = '#3564f6'
 const maxQueue = 100
+
 let animationFrameId
-let frameCount = 0
+let pulseCount = 0
 
 function App() {
-  const [coinPrices, setCoinPrices] = useState([
-    {symbol: ticker, price: 0.0, timestamp: Date.now()},
-  ])
+  const [dataPoints, setDataPoints] = useState([])
   const canvasRef = useRef(null)
 
   useEffect(() => {
+    // get price data on an interval basis (every 1 second)
     const interval = setInterval(
       () =>
         fetch(`https://www.binance.com/api/v3/ticker/price?symbol=${ticker}`)
           .then(async (response) => {
             const {symbol, price} = await response.json()
-            setCoinPrices((prev) => {
+            // add the price (and some extra data) to the state array,
+            // whilst making sure the queue length doesn't exceed the allowed number (see variable "maxQueue")
+            setDataPoints((prev) => {
               while (prev.length >= maxQueue) prev.shift()
               return [
                 ...prev,
@@ -33,26 +36,33 @@ function App() {
   }, [])
 
   useEffect(() => {
-    // set width and height according to screen
     const canvas = canvasRef.current
+    const ctx = canvas.getContext('2d')
+
+    // set width and height according to screen size.
+    // this is also applied when the screen size changes
     canvas.width = window.innerWidth - 100
     canvas.height = window.innerHeight - 420
-    // set colors of canvas items
-    const ctx = canvas.getContext('2d')
-    ctx.strokeStyle = '#3564f6'
-    ctx.fillStyle = '#3564f6'
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // set colors of canvas items.
+    // basically required on-mount, but it won't hurt performance by applying this on window-size-change
+    ctx.strokeStyle = canvasColor
+    ctx.fillStyle = canvasColor
+
+    // eslint-disable-next-line
   }, [window.innerWidth, window.innerHeight])
 
   useEffect(() => {
     const canvas = canvasRef.current
-    const ctx = canvasRef.current.getContext('2d')
+    const ctx = canvas.getContext('2d')
 
     const draw = () => {
-      frameCount++
+      pulseCount++
       let maxPrice = 0
       let minPrice = 0
-      coinPrices.forEach(({price}) => {
+
+      // find the highest price, and lowest price in the current queue
+      dataPoints.forEach(({price}) => {
         if (price > maxPrice) {
           maxPrice = price
         } else if (price < minPrice || minPrice === 0) {
@@ -60,28 +70,31 @@ function App() {
         }
       })
 
-      const pulseRadius = 7 * Math.sin(frameCount * 0.05) ** 2
+      // generic calculators to get the X and Y positions for each data point
+      const pulseRadius = 7 * Math.sin(pulseCount * 0.05) ** 2
       const getX = (index) => (canvas.width / maxQueue) * index
       const getY = (price) =>
         Math.abs((canvas.height / (maxPrice - minPrice)) * (price - minPrice) - canvas.height)
 
-      // pulse dot
+      // draw the pulse dot
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
       ctx.beginPath()
       ctx.arc(
-        coinPrices.length >= canvas.width
+        dataPoints.length >= canvas.width
           ? getX(canvas.width - pulseRadius)
-          : getX(coinPrices.length - 1),
-        getY(coinPrices[coinPrices.length - 1].price),
+          : dataPoints.length
+          ? getX(dataPoints.length - 1)
+          : getX(0),
+        dataPoints.length ? getY(dataPoints[dataPoints.length - 1].price) : getY(0),
         pulseRadius,
         0,
         2 * Math.PI,
       )
       ctx.fill()
 
-      // graph lines
+      // draw the graph lines
       ctx.beginPath()
-      coinPrices.forEach(({price}, i) => {
+      dataPoints.forEach(({price}, i) => {
         if (i === 0) {
           ctx.moveTo(getX(i), getY(price))
         } else {
@@ -98,15 +111,16 @@ function App() {
     return () => {
       window.cancelAnimationFrame(animationFrameId)
     }
-  }, [coinPrices])
+  }, [dataPoints])
 
   return (
     <div className='app flex-col'>
       <header className='ticker flex-col'>
         <img src={logo} alt='logo' className='logo' />
-        <span className='price'>${coinPrices[coinPrices.length - 1].price}</span>
+        <span className='price'>
+          ${dataPoints.length ? dataPoints[dataPoints.length - 1].price : 0}
+        </span>
       </header>
-
       <canvas ref={canvasRef} />
     </div>
   )
