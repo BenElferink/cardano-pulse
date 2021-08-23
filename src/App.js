@@ -1,4 +1,5 @@
 import {useEffect, useRef, useState} from 'react'
+import logo from './images/cardano-logo-1024x1024.png'
 
 const ticker = 'ADABUSD'
 const maxQueue = window.innerWidth
@@ -97,7 +98,7 @@ function App() {
   return (
     <div className='app flex-col'>
       <header className='ticker flex-col'>
-        <img src='/assets/images/cardano-logo-1024x1024.png' alt='logo' className='logo' />
+        <img src={logo} alt='logo' className='logo' />
         <span className='price'>${coinPrices[coinPrices.length - 1].price}</span>
       </header>
 
