@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from 'react'
 import logo from './images/cardano-logo-1024x1024.png'
 
 const ticker = 'ADABUSD'
-let maxQueue = window.innerWidth
+const maxQueue = 60
 let animationFrameId
 let frameCount = 0
 
@@ -37,7 +37,6 @@ function App() {
     const canvas = canvasRef.current
     canvas.width = window.innerWidth - 100
     canvas.height = window.innerHeight - 420
-    maxQueue = window.innerWidth
     // set colors of canvas items
     const ctx = canvas.getContext('2d')
     ctx.strokeStyle = '#3564f6'
@@ -62,6 +61,7 @@ function App() {
       })
 
       const pulseRadius = 7 * Math.sin(frameCount * 0.05) ** 2
+      const getX = (index) => (canvas.width / maxQueue) * index
       const getY = (price) =>
         Math.abs((canvas.height / (maxPrice - minPrice)) * (price - minPrice) - canvas.height)
 
@@ -69,7 +69,9 @@ function App() {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
       ctx.beginPath()
       ctx.arc(
-        coinPrices.length >= canvas.width ? canvas.width - pulseRadius : coinPrices.length - 1,
+        coinPrices.length >= canvas.width
+          ? getX(canvas.width - pulseRadius)
+          : getX(coinPrices.length - 1),
         getY(coinPrices[coinPrices.length - 1].price),
         pulseRadius,
         0,
@@ -79,11 +81,11 @@ function App() {
 
       // graph lines
       ctx.beginPath()
-      coinPrices.forEach(({price}, dataPointX) => {
-        if (dataPointX === 0) {
-          ctx.moveTo(dataPointX, getY(price))
+      coinPrices.forEach(({price}, i) => {
+        if (i === 0) {
+          ctx.moveTo(getX(i), getY(price))
         } else {
-          ctx.lineTo(dataPointX, getY(price))
+          ctx.lineTo(getX(i), getY(price))
         }
       })
       ctx.stroke()
