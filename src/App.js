@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from 'react'
 import logo from './images/cardano-logo-1024x1024.png'
 
 const ticker = 'ADABUSD'
-const maxQueue = 60
+const maxQueue = 100
 let animationFrameId
 let frameCount = 0
 
