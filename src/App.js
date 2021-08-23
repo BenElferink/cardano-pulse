@@ -2,9 +2,9 @@ import {useEffect, useRef, useState} from 'react'
 import logo from './images/cardano-logo-1024x1024.png'
 
 const ticker = 'ADABUSD'
-const maxQueue = window.innerWidth
-let frameCount = 0
+let maxQueue = window.innerWidth
 let animationFrameId
+let frameCount = 0
 
 function App() {
   const [coinPrices, setCoinPrices] = useState([
@@ -33,14 +33,17 @@ function App() {
   }, [])
 
   useEffect(() => {
+    // set width and height according to screen
     const canvas = canvasRef.current
     canvas.width = window.innerWidth - 100
     canvas.height = window.innerHeight - 420
-
+    maxQueue = window.innerWidth
+    // set colors of canvas items
     const ctx = canvas.getContext('2d')
     ctx.strokeStyle = '#3564f6'
     ctx.fillStyle = '#3564f6'
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [window.innerWidth, window.innerHeight])
 
   useEffect(() => {
     const canvas = canvasRef.current
