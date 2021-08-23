@@ -1,6 +1,12 @@
 {
-  "short_name": "Cardano Console",
-  "name": "Cardano Console",
+  "short_name": "Cardano Pulse",
+  "name": "Cardano Pulse",
+  "description": "An application to view the live-price of Cardano (ADA)",
+  "author": "Ben Elferink",
+  "developer": {
+    "name": "Ben Elferink",
+    "url": "https://github.com/belferink1996"
+  },
   "icons": [
     {
       "src": "favicon.ico",
