@@ -12,10 +12,7 @@ const fixedDecimals = 3
 
 export default function App() {
   const [dataPoints, setDataPoints] = useState([])
-  const [change24hr, setChange24hr] = useState({
-    priceChange: 0,
-    priceChangePercent: 0,
-  })
+  const [change24hr, setChange24hr] = useState({priceChange: 0, priceChangePercent: 0})
 
   useEffect(() => {
     // get price data on an interval basis (every 1 second)
@@ -63,18 +60,17 @@ export default function App() {
 
   return (
     <div className='app flex-col' style={{backgroundColor}}>
-      <header className='header flex-row'>
-        <div className='ticker flex-col'>
-          <img src={logo} alt='logo' className='logo' />
-          <div className='flex-row'>
-            <span className='price'>
-              ${dataPoints.length ? dataPoints[dataPoints.length - 1].price : 0}
-            </span>
-            &nbsp;&nbsp;&nbsp;
-            <div className='flex-col'>
-              <ChangeGreenRed value={change24hr.priceChangePercent} suffix='%' invert withCaret />
-              <ChangeGreenRed value={change24hr.priceChange} prefix='$' scale='0.8' />
-            </div>
+      <header className='ticker flex-col'>
+        <img src={logo} alt='logo' className='logo' />
+
+        <div className='flex-row'>
+          <span className='price'>
+            ${dataPoints.length ? dataPoints[dataPoints.length - 1].price : 0}
+          </span>
+
+          <div className='flex-col'>
+            <ChangeGreenRed value={change24hr.priceChangePercent} suffix='%' invert withCaret />
+            <ChangeGreenRed value={change24hr.priceChange} prefix='$' scale='0.8' />
           </div>
         </div>
       </header>

@@ -20,19 +20,16 @@ code {
   min-height: 100vh;
 }
 
-.header {
-  width: 100%;
-}
-
 .ticker {
+  width: 100%;
   height: 18rem;
 }
 
 .logo {
   width: 11rem;
   height: 11rem;
-  -webkit-filter: drop-shadow(0.5px -0.5px 0.5px var(--white));
-  filter: drop-shadow(0.5px -0.5px 0.5px var(--white));
+  -webkit-filter: drop-shadow(0px -1px 1px var(--white));
+  filter: drop-shadow(0px -1px 1px var(--white));
 }
 
 .price {
