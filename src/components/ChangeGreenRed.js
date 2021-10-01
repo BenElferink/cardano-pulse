@@ -29,9 +29,9 @@ export default function ChangeGreenRed({
   return (
     <span style={style}>
       {withCaret && value > 0 ? (
-        <CaretUp size={12 * scale} fill={invertColor} style={{marginRight: `${2 * scale}px`}} />
+        <CaretUp size={10 * scale} fill={invertColor} style={{marginRight: `${2 * scale}px`}} />
       ) : withCaret && value < 0 ? (
-        <CaretDown size={12 * scale} fill={invertColor} style={{marginRight: `${2 * scale}px`}} />
+        <CaretDown size={10 * scale} fill={invertColor} style={{marginRight: `${2 * scale}px`}} />
       ) : null}
       {prefix}
       {value}
