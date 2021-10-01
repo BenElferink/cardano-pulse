@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/cardano-pulse/static/css/main.3ee7aa31.chunk.css",
+    "main.css": "/cardano-pulse/static/css/main.499785d0.chunk.css",
     "main.js": "/cardano-pulse/static/js/main.a09b25c8.chunk.js",
     "main.js.map": "/cardano-pulse/static/js/main.a09b25c8.chunk.js.map",
     "runtime-main.js": "/cardano-pulse/static/js/runtime-main.a1f21b24.js",
@@ -8,14 +8,14 @@
     "static/js/2.610ef947.chunk.js": "/cardano-pulse/static/js/2.610ef947.chunk.js",
     "static/js/2.610ef947.chunk.js.map": "/cardano-pulse/static/js/2.610ef947.chunk.js.map",
     "index.html": "/cardano-pulse/index.html",
-    "static/css/main.3ee7aa31.chunk.css.map": "/cardano-pulse/static/css/main.3ee7aa31.chunk.css.map",
+    "static/css/main.499785d0.chunk.css.map": "/cardano-pulse/static/css/main.499785d0.chunk.css.map",
     "static/js/2.610ef947.chunk.js.LICENSE.txt": "/cardano-pulse/static/js/2.610ef947.chunk.js.LICENSE.txt",
     "static/media/cardano-logo-1024x1024.a528433f.png": "/cardano-pulse/static/media/cardano-logo-1024x1024.a528433f.png"
   },
   "entrypoints": [
     "static/js/runtime-main.a1f21b24.js",
     "static/js/2.610ef947.chunk.js",
-    "static/css/main.3ee7aa31.chunk.css",
+    "static/css/main.499785d0.chunk.css",
     "static/js/main.a09b25c8.chunk.js"
   ]
 }
