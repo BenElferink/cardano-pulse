@@ -1,6 +1,6 @@
 import {useEffect, useRef} from 'react'
 
-function PulseCanvas({dataPoints, maxPoints, color}) {
+export default function PulseCanvas({dataPoints, maxPoints, color}) {
   const canvasRef = useRef(null)
   const animationFrameId = useRef(0)
   const pulseCount = useRef(0)
@@ -85,5 +85,3 @@ function PulseCanvas({dataPoints, maxPoints, color}) {
 
   return <canvas ref={canvasRef} />
 }
-
-export default PulseCanvas

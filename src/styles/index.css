@@ -1,7 +1,5 @@
 :root {
-  --dark: #141428;
-  --light: #f9f9f9;
-  --blue: #3564f6;
+  --white: #f9f9f9;
 }
 
 body {
@@ -10,10 +8,42 @@ body {
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--white);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.app {
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.header {
+  width: 100%;
+}
+
+.ticker {
+  height: 18rem;
+}
+
+.logo {
+  width: 11rem;
+  height: 11rem;
+  -webkit-filter: drop-shadow(0.5px -0.5px 0.5px var(--white));
+  filter: drop-shadow(0.5px -0.5px 0.5px var(--white));
+}
+
+.price {
+  font-size: 2rem;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .flex-col {
@@ -21,26 +51,4 @@ code {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-}
-
-.app {
-  width: 100vw;
-  min-height: 100vh;
-  background: var(--dark);
-}
-
-.ticker {
-  height: 18rem;
-  color: var(--light);
-}
-
-.logo {
-  width: 11rem;
-  height: 11rem;
-  -webkit-filter: drop-shadow(0.5px -0.5px 0.5px var(--light));
-  filter: drop-shadow(0.5px -0.5px 0.5px var(--light));
-}
-
-.price {
-  font-size: 2rem;
 }
