@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/cardano-pulse/static/css/main.9b982ddb.chunk.css",
-    "main.js": "/cardano-pulse/static/js/main.11131b75.chunk.js",
-    "main.js.map": "/cardano-pulse/static/js/main.11131b75.chunk.js.map",
+    "main.js": "/cardano-pulse/static/js/main.3db6820f.chunk.js",
+    "main.js.map": "/cardano-pulse/static/js/main.3db6820f.chunk.js.map",
     "runtime-main.js": "/cardano-pulse/static/js/runtime-main.a1f21b24.js",
     "runtime-main.js.map": "/cardano-pulse/static/js/runtime-main.a1f21b24.js.map",
     "static/js/2.99db5dff.chunk.js": "/cardano-pulse/static/js/2.99db5dff.chunk.js",
@@ -16,6 +16,6 @@
     "static/js/runtime-main.a1f21b24.js",
     "static/js/2.99db5dff.chunk.js",
     "static/css/main.9b982ddb.chunk.css",
-    "static/js/main.11131b75.chunk.js"
+    "static/js/main.3db6820f.chunk.js"
   ]
 }
