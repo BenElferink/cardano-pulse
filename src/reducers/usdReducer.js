@@ -15,7 +15,7 @@ export default function reducer(state, action) {
         ...state,
         dataPoints: [
           ...prev,
-          {price: Number(Number(price).toFixed(usdDecimals)), timestamp: Date.now()},
+          {price: price.substring(0, usdDecimals + (price > 0 ? 2 : 3)), timestamp: Date.now()},
         ],
       }
     }
@@ -26,8 +26,11 @@ export default function reducer(state, action) {
         ...state,
         change24hr: {
           ...change24hr,
-          priceChange: Number(Number(priceChange).toFixed(usdDecimals)),
-          priceChangePercent: Number(Number(priceChangePercent).toFixed(percentDecimals)),
+          priceChange: priceChange.substring(0, usdDecimals + (priceChange > 0 ? 2 : 3)),
+          priceChangePercent: priceChangePercent.substring(
+            0,
+            percentDecimals + (priceChangePercent > 0 ? 2 : 3),
+          ),
           timestamp: Date.now(),
         },
       }

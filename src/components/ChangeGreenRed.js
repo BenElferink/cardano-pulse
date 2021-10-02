@@ -10,8 +10,6 @@ export default function ChangeGreenRed({
   withCaret = false,
   scale = 1,
 }) {
-  scale = Number(scale)
-
   const changeColor = value > 0 ? green : value < 0 ? red : 'unset'
 
   const style = {

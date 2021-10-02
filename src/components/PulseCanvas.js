@@ -1,6 +1,6 @@
 import {useEffect, useRef} from 'react'
 
-export default function PulseCanvas({color = 'unset', dataPoints = [{price: 0}]}) {
+export default function PulseCanvas({dataPoints = [{price: 0}], color = 'unset'}) {
   const canvasRef = useRef(null)
   const animationFrameId = useRef(0)
   const pulseCount = useRef(0)

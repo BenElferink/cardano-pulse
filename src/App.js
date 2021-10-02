@@ -78,7 +78,7 @@ export default function App() {
         </div>
       </header>
 
-      <PulseCanvas color={token.accentColor} dataPoints={dataPoints} />
+      <PulseCanvas dataPoints={dataPoints} color={token.accentColor} />
     </div>
   )
 }
