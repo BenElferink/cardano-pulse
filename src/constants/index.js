@@ -7,7 +7,7 @@ export const usdDecimals = 3
 export const btcDecimals = 10
 export const percentDecimals = 2
 
-export const maxQueue = 100
+export const maxQueue = 420
 export const initialReducerState = {
   dataPoints: [
     {
