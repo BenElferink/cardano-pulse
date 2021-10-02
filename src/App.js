@@ -72,7 +72,7 @@ export default function App() {
         className='toggle-currency'
         style={{color: accentColor}}
         onClick={() => setDisplayBitcoin((prev) => !prev)}>
-        {displayBitcoin ? 'Show in usdSymbol' : 'Show in btcSymbol'}
+        {displayBitcoin ? 'Show in USD' : 'Show in BTC'}
       </button>
 
       <header className='ticker flex-col'>
