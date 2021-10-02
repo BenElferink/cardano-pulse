@@ -4,12 +4,13 @@ export default async function handleBinanceApi(
     if (!error) console.table(responseData)
   },
 ) {
+  const startTime = performance.now()
   try {
     const response = await fetch(`https://www.binance.com${path}`)
     const data = await response.json()
-    callback(data)
+    callback({...data, processTime: performance.now() - startTime})
   } catch (error) {
     console.error(error)
-    callback({error}, 'ERROR')
+    callback({error, processTime: performance.now() - startTime}, 'ERROR')
   }
 }

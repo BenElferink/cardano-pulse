@@ -20,15 +20,33 @@ code {
   min-height: 100vh;
 }
 
+.connection {
+  font-size: 0.8rem;
+  position: absolute;
+  top: 1rem;
+  left: calc(1rem + 10px);
+  opacity: 0.75;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .toggle-currency {
   padding: 0.3rem 0.4rem;
   background-color: transparent;
   border-radius: 11px;
   border: 1px solid;
+  font-size: 0.8rem;
   cursor: pointer;
   position: absolute;
   top: 1rem;
   right: 1rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .ticker {

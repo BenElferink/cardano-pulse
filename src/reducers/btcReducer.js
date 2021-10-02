@@ -1,9 +1,11 @@
 import {maxQueue, percentDecimals, btcDecimals} from '../constants'
 
 export default function reducer(state, action) {
-  const {dataPoints, change24hr} = state
-  const {type, payload} = action
-  const {price, priceChange, priceChangePercent} = payload
+  const {dataPoints} = state
+  const {
+    type,
+    payload: {price, priceChange, priceChangePercent},
+  } = action
 
   switch (type) {
     case 'ADD_PRICE': {
@@ -15,7 +17,10 @@ export default function reducer(state, action) {
         ...state,
         dataPoints: [
           ...prev,
-          {price: price.substring(0, btcDecimals + (price > 0 ? 2 : 3)), timestamp: Date.now()},
+          {
+            price: price.substring(0, btcDecimals + (price > 0 ? 2 : 3)),
+            timestamp: Date.now(),
+          },
         ],
       }
     }
@@ -25,7 +30,6 @@ export default function reducer(state, action) {
       return {
         ...state,
         change24hr: {
-          ...change24hr,
           priceChange: priceChange.substring(0, btcDecimals + (priceChange > 0 ? 2 : 3)),
           priceChangePercent: priceChangePercent.substring(
             0,

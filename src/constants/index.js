@@ -6,14 +6,19 @@ export const btcSymbol = '₿'
 export const usdDecimals = 3
 export const btcDecimals = 8
 export const percentDecimals = 2
-
 export const maxQueue = 60
-export const initialReducerState = {
+
+export const initialPriceReducerState = {
   dataPoints: [],
   change24hr: {
     priceChange: 0,
     priceChangePercent: 0,
   },
+}
+
+export const initialConnectionReducerState = {
+  goodConnection: false,
+  processTimes: [0],
 }
 
 export const token = {
