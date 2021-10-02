@@ -33,12 +33,17 @@ export default function PulseCanvas({dataPoints, maxPoints, color}) {
 
       // find the highest price, and lowest price in the current queue
       dataPoints.forEach(({price}) => {
-        if (price > maxPrice) {
+        if (price > maxPrice || maxPrice === 0) {
           maxPrice = price
         } else if (price < minPrice || minPrice === 0) {
           minPrice = price
         }
       })
+
+      // this fixes a bug where on-mount price may be stable, and the chart would not display a pulse
+      if (maxPrice === minPrice) {
+        minPrice -= 0.001
+      }
 
       // generic calculators to get the X and Y positions for each dataPoints point
       const pulseRadius = 7 * Math.sin(pulseCount.current * 0.05) ** 2
