@@ -1,6 +1,6 @@
 import {useEffect, useRef} from 'react'
 
-export default function PulseCanvas({dataPoints, maxPoints, color}) {
+export default function PulseCanvas({dataPoints, maxPoints, fixedDecimals, color}) {
   const canvasRef = useRef(null)
   const animationFrameId = useRef(0)
   const pulseCount = useRef(0)
@@ -42,7 +42,7 @@ export default function PulseCanvas({dataPoints, maxPoints, color}) {
 
       // this fixes a bug where on-mount price may be stable, and the chart would not display a pulse
       if (maxPrice === minPrice) {
-        minPrice -= 0.001
+        minPrice -= Number('0.0000000000'.substring(0, fixedDecimals + 1) + '1')
       }
 
       // generic calculators to get the X and Y positions for each dataPoints point

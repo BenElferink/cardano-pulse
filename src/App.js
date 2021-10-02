@@ -75,7 +75,12 @@ export default function App() {
         </div>
       </header>
 
-      <PulseCanvas dataPoints={dataPoints} maxPoints={maxQueue} color={canvasColor} />
+      <PulseCanvas
+        dataPoints={dataPoints}
+        maxPoints={maxQueue}
+        fixedDecimals={fixedDecimals}
+        color={canvasColor}
+      />
     </div>
   )
 }
