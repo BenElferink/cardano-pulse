@@ -1,11 +1,6 @@
 import {useEffect, useRef} from 'react'
 
-export default function PulseCanvas({
-  color = 'unset',
-  dataPoints = [{price: 0}],
-  maxPoints = 10,
-  numOfPriceDecimals = 3,
-}) {
+export default function PulseCanvas({color = 'unset', dataPoints = [{price: 0}]}) {
   const canvasRef = useRef(null)
   const animationFrameId = useRef(0)
   const pulseCount = useRef(0)
@@ -47,12 +42,17 @@ export default function PulseCanvas({
 
       // this fixes a bug where on-mount price may be stable, and the chart would not display a pulse
       if (maxPrice === minPrice) {
-        minPrice -= Number('0.000000000000000'.substring(0, numOfPriceDecimals + 1) + '1')
+        minPrice -= Number(
+          '0.00000000000000000000000000000000000000000000000000'.substring(
+            0,
+            String(maxPrice).length,
+          ) + '1',
+        )
       }
 
       // generic calculators to get the X and Y positions for each dataPoints point
       const pulseRadius = 7 * Math.sin(pulseCount.current * 0.05) ** 2
-      const getX = (index) => (canvas.width / maxPoints) * index
+      const getX = (index) => (canvas.width / dataPoints.length) * index
       const getY = (price) =>
         Math.abs((canvas.height / (maxPrice - minPrice)) * (price - minPrice) - canvas.height)
 
@@ -91,7 +91,7 @@ export default function PulseCanvas({
       window.cancelAnimationFrame(animationFrameId.current)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataPoints, maxPoints])
+  }, [dataPoints])
 
   return <canvas ref={canvasRef} />
 }

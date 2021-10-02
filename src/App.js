@@ -5,24 +5,7 @@ import useLocalStorage from './hooks/useLocalStorage'
 import handleBinanceApi from './functions/handleBinanceApi'
 import ChangeGreenRed from './components/ChangeGreenRed'
 import PulseCanvas from './components/PulseCanvas'
-import {usdSymbol, usdDecimals, btcSymbol, btcDecimals, maxQueue} from './constants'
-
-import logo from './images/cardano-logo-1024x1024.png'
-const ticker = 'ADA'
-const accentColor = '#3564f6'
-const backgroundColor = '#141428'
-
-const initialReducerState = {
-  dataPoints: [
-    {
-      price: 0,
-    },
-  ],
-  change24hr: {
-    priceChange: 0,
-    priceChangePercent: 0,
-  },
-}
+import {initialReducerState, token, usdSymbol, btcSymbol} from './constants'
 
 export default function App() {
   const [usdState, dispatchUsd] = useReducer(usdReducer, initialReducerState)
@@ -31,25 +14,25 @@ export default function App() {
 
   useEffect(() => {
     const usdLivePriceInterval = setInterval(() => {
-      handleBinanceApi(`/api/v3/ticker/price?symbol=${ticker}BUSD`, (data, error) => {
+      handleBinanceApi(`/api/v3/ticker/price?symbol=${token.ticker}BUSD`, (data, error) => {
         if (!error) dispatchUsd({type: 'ADD_PRICE', payload: data})
       })
     }, 1000)
 
     const usdPriceChangeInterval = setInterval(() => {
-      handleBinanceApi(`/api/v3/ticker/24hr?symbol=${ticker}BUSD`, (data, error) => {
+      handleBinanceApi(`/api/v3/ticker/24hr?symbol=${token.ticker}BUSD`, (data, error) => {
         if (!error) dispatchUsd({type: 'ADD_24HOUR', payload: data})
       })
     }, 5000)
 
     const btcLivePriceInterval = setInterval(() => {
-      handleBinanceApi(`/api/v3/ticker/price?symbol=${ticker}BTC`, (data, error) => {
+      handleBinanceApi(`/api/v3/ticker/price?symbol=${token.ticker}BTC`, (data, error) => {
         if (!error) dispatchBtc({type: 'ADD_PRICE', payload: data})
       })
     }, 1000)
 
     const btcPriceChangeInterval = setInterval(() => {
-      handleBinanceApi(`/api/v3/ticker/24hr?symbol=${ticker}BTC`, (data, error) => {
+      handleBinanceApi(`/api/v3/ticker/24hr?symbol=${token.ticker}BTC`, (data, error) => {
         if (!error) dispatchBtc({type: 'ADD_24HOUR', payload: data})
       })
     }, 5000)
@@ -61,22 +44,22 @@ export default function App() {
       clearInterval(btcPriceChangeInterval)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ticker])
+  }, [token])
 
   const dataPoints = displayBitcoin ? btcState.dataPoints : usdState.dataPoints
   const change24hr = displayBitcoin ? btcState.change24hr : usdState.change24hr
 
   return (
-    <div className='app flex-col' style={{backgroundColor}}>
+    <div className='app flex-col' style={{backgroundColor: token.backgroundColor}}>
       <button
         className='toggle-currency'
-        style={{color: accentColor}}
+        style={{color: token.accentColor}}
         onClick={() => setDisplayBitcoin((prev) => !prev)}>
         {displayBitcoin ? 'Show in USD' : 'Show in BTC'}
       </button>
 
       <header className='ticker flex-col'>
-        <img src={logo} alt='logo' className='logo' />
+        <img src={token.logo} alt='logo' className='logo' />
 
         <div className='flex-row'>
           <span className='price'>
@@ -95,12 +78,7 @@ export default function App() {
         </div>
       </header>
 
-      <PulseCanvas
-        color={accentColor}
-        dataPoints={dataPoints}
-        maxPoints={maxQueue}
-        numOfPriceDecimals={displayBitcoin ? btcDecimals : usdDecimals}
-      />
+      <PulseCanvas color={token.accentColor} dataPoints={dataPoints} />
     </div>
   )
 }
