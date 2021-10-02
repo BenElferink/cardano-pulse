@@ -9,11 +9,7 @@ export const percentDecimals = 2
 
 export const maxQueue = 60
 export const initialReducerState = {
-  dataPoints: [
-    {
-      price: 0,
-    },
-  ],
+  dataPoints: [],
   change24hr: {
     priceChange: 0,
     priceChangePercent: 0,
